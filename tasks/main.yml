@@ -1,0 +1,45 @@
+---
+
+## Init
+
+- name: Ensure project directories exist
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ docker_project_path }}"
+    - "{{ docker_project_path }}/config"
+    - "{{ docker_project_path }}/images"
+  tags: ["init"]
+
+## Configure
+
+- name: Check for host-specific configuration files
+  delegate_to: localhost
+  ansible.builtin.stat:
+    path: "config/homepage/{{ inventory_hostname }}"
+  register: host_config_dir
+
+- name: Copy host-specific configuration files
+  ansible.builtin.copy:
+    src: "config/homepage/{{ inventory_hostname }}/"
+    dest: "{{ docker_project_path }}/"
+  when:
+    - host_config_dir.stat.exists
+    - host_config_dir.stat.isdir
+  notify: Restart homepage
+
+
+- name: Template docker-compose.yml
+  ansible.builtin.template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker_project_path }}/docker-compose.yml"
+    mode: '0644'
+    validate: "{{ docker_cmd }} compose -f %s config"
+    backup: true
+
+## Run
+
+- name: Start app
+  ansible.builtin.include_role: { name: djuuu.docker_project, tasks_from: compose-up }

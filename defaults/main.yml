@@ -1,0 +1,23 @@
+---
+
+# Docker project variables
+
+homepage_project_name: homepage
+
+# Main service additional docker-compose options (ex: cpu_shares, deploy, ...)
+homepage_compose_service_additional_options: |
+  #ports:
+  #  - 3000:3000
+
+# Homepage project variables
+
+# ghcr.io/gethomepage/homepage image version
+homepage_version: latest
+
+# UID container is running as
+homepage_puid: "{{ ansible_user_uid }}"
+# GID container is running as
+homepage_pgid: "{{ ansible_user_gid }}"
+
+# (optional) For docker integrations
+homepage_mount_docker_socket: false
