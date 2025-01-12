@@ -25,6 +25,8 @@
   ansible.builtin.copy:
     src: "config/homepage/{{ inventory_hostname }}/"
     dest: "{{ docker_project_path }}/"
+    directory_mode: '0755'
+    mode: '0644'
   when:
     - host_config_dir.stat.exists
     - host_config_dir.stat.isdir
