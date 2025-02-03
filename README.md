@@ -49,6 +49,12 @@ homepage_pgid: "{{ ansible_user_gid }}"
 
 # (optional) For docker integrations
 homepage_mount_docker_socket: false
+
+# Environment secrets
+# https://gethomepage.dev/installation/docker/#using-environment-secrets
+homepage_env:
+#  HOMEPAGE_VAR_SOME_EXAMPLE: some-example
+#  HOMEPAGE_VAR_OTHER_EXAMPLE: other-example
 ```
 
 Config files

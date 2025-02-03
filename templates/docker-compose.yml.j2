@@ -16,6 +16,7 @@ services:
     environment:
       PUID: {{ homepage_puid }}
       PGID: {{ homepage_pgid }}
+    env_file: .env
 
     volumes:
       # Homepage local configuration
