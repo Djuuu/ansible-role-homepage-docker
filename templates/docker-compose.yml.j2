@@ -10,6 +10,9 @@ services:
     container_name: {{ docker_project_slug }}
     image: ghcr.io/gethomepage/homepage:{{ homepage_version }}
     restart: unless-stopped
+    {% if homepage_network_mode == 'host' %}
+    network_mode: host
+    {% endif %}
 
     {{ docker_project_compose_service_additional_options | indent(4) }}
 
@@ -33,7 +36,9 @@ services:
       # What's up Docker? - https://github.com/getwud/wud
       wud.watch.digest: true
 
+{% if homepage_network_mode != 'host' %}
 networks:
   {{ docker_project_default_network | indent(2) }}
+{% endif %}
 
 {{ docker_project_compose_additional_options }}

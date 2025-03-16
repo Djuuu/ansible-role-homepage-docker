@@ -55,6 +55,9 @@ homepage_mount_docker_socket: false
 homepage_env:
 #  HOMEPAGE_VAR_SOME_EXAMPLE: some-example
 #  HOMEPAGE_VAR_OTHER_EXAMPLE: other-example
+
+# Homepage network mode (bridge|host)
+homepage_network_mode: bridge
 ```
 
 Config files
