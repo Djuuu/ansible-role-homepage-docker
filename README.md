@@ -50,6 +50,11 @@ homepage_pgid: "{{ ansible_user_gid }}"
 # (optional) For docker integrations
 homepage_mount_docker_socket: false
 
+# Allowed hosts homepage can be exposed on (with port if necessary) 
+homepage_allowed_hosts: []
+#  - homepage.lan:3000
+#  - homepage.mydomain.net
+
 # Environment secrets
 # https://gethomepage.dev/installation/docker/#using-environment-secrets
 homepage_env:

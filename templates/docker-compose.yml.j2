@@ -19,6 +19,7 @@ services:
     environment:
       PUID: {{ homepage_puid }}
       PGID: {{ homepage_pgid }}
+      HOMEPAGE_ALLOWED_HOSTS: {{ homepage_allowed_hosts | join(',') }}
     env_file: .env
 
     volumes:
