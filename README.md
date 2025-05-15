@@ -31,7 +31,7 @@ Available role variables are listed below, along with default values (see `defau
 homepage_project_name: homepage
 
 # Main service additional docker-compose options (ex: cpu_shares, deploy, ...)
-homepage_compose_service_additional_options: |
+homepage_service_additional_options: |
   #ports:
   #  - 3000:3000
 ```
@@ -60,9 +60,6 @@ homepage_allowed_hosts: []
 homepage_env:
 #  HOMEPAGE_VAR_SOME_EXAMPLE: some-example
 #  HOMEPAGE_VAR_OTHER_EXAMPLE: other-example
-
-# Homepage network mode (bridge|host)
-homepage_network_mode: bridge
 ```
 
 Config files

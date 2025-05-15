@@ -7,14 +7,13 @@ name: {{ docker_project_slug }}
 services:
 
   homepage:
-    container_name: {{ docker_project_slug }}
     image: ghcr.io/gethomepage/homepage:{{ homepage_version }}
-    restart: unless-stopped
-    {% if homepage_network_mode == 'host' %}
-    network_mode: host
-    {% endif %}
+    container_name: {{ docker_project_slug }}
+    restart: {{ docker_project_restart }}
 
-    {{ docker_project_compose_service_additional_options | indent(4) }}
+    {{ docker_project_service_network_options | indent(4) }}
+
+    {{ docker_project_service_additional_options | indent(4) }}
 
     environment:
       PUID: {{ homepage_puid }}
@@ -37,9 +36,6 @@ services:
       # What's up Docker? - https://github.com/getwud/wud
       wud.watch.digest: true
 
-{% if homepage_network_mode != 'host' %}
-networks:
-  {{ docker_project_default_network | indent(2) }}
-{% endif %}
+{{ docker_project_networks }}
 
 {{ docker_project_compose_additional_options }}
